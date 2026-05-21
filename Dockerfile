@@ -11,10 +11,10 @@ COPY apps/backend/ .
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-RUN npx medusa build && find .medusa -maxdepth 4 2>/dev/null | head -60 || echo "no .medusa dir"
+RUN npx medusa build
 
 EXPOSE 9000
 
 ENV NODE_ENV=production
 
-CMD ["sh", "-c", "npx medusa db:migrate && node .medusa/server/index.js"]
+CMD ["sh", "-c", "npx medusa db:migrate && npx medusa start"]
