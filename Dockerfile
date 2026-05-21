@@ -17,4 +17,4 @@ EXPOSE 9000
 
 ENV NODE_ENV=production
 
-CMD ["npx", "medusa", "start"]
+CMD ["sh", "-c", "npx medusa db:migrate && npx medusa start"]
