@@ -11,7 +11,7 @@ COPY apps/backend/ .
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-RUN npx medusa build
+RUN npx medusa build && find .medusa -maxdepth 4 2>/dev/null | head -60 || echo "no .medusa dir"
 
 EXPOSE 9000
 
