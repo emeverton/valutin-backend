@@ -1,7 +1,4 @@
-FROM node:20-alpine
-
-# Native build tools needed by some Medusa dependencies
-RUN apk add --no-cache python3 make g++
+FROM node:20
 
 WORKDIR /app
 
@@ -16,6 +13,9 @@ RUN npm install
 COPY apps/backend/ apps/backend/
 
 WORKDIR /app/apps/backend
+
+# Increase memory for Vite admin dashboard build
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 
 RUN npx medusa build
 
